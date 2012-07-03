@@ -1,0 +1,34 @@
+<html>
+    <body>
+        <h1>TASK LIST</h1>
+        <div style="float:left; width:50%">
+            <h2>Incomplete</h2>
+            {% for task in tasks if task.done == False %}
+            <div style="float:left; width:80%">
+                <ul>
+                    <li style="line-height:4px;">{{task.id}}{{task.title}} <span style="font-size:50%">{{task.notes}}</span></li>
+                </ul>
+            </div>
+            <div style="float:left; width:10%;margin-top:3px">
+                <form action="/list_tasks.html" method="POST">
+                    <input type="submit" value="&#10003;" >
+                </form>            
+            </div>
+            {% endfor %}
+        </div>
+        
+        
+
+        <div style="float:left; width:50%">
+            <h2>Complete</h2>
+            <ol>
+            {% for task in tasks if task.done == True %}
+                <li>{{task.title}} {{task.completed_at}}</li>
+            {% endfor %}
+            </ol>
+        </div>
+        <div style="float:left; width:100%">
+            <h3>Add a new <a href="/add"> task</a></h3>
+        </div>
+    </body>
+</html>
