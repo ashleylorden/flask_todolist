@@ -1,4 +1,21 @@
+
+
 <html>
+<head>
+
+<script src="{{url_for('static', filename='jquery-1.7.2.min.js')}}" type="text/javascript"></script>
+<script type="text/javascript">
+    $('#clickme').click(function() {
+      $('#book').animate({
+        opacity: 0.25,
+        left: '+=50',
+      }, 5000, function() {
+        // Animation complete.
+      });
+    });
+</script>
+
+</head>
     <body>
         <h1>TASK LIST</h1>
         <div style="float:left; width:50%">
@@ -19,7 +36,8 @@
         
         
 
-        <div style="float:left; width:50%">
+        <div style="float:left; width:50%" id="Completed_list">
+
             <h2>Complete</h2>
             <ol>
             {% for task in tasks if task.done == True %}
@@ -31,4 +49,5 @@
             <h3>Add a new <a href="/add"> task</a></h3>
         </div>
     </body>
+
 </html>
