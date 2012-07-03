@@ -2,18 +2,18 @@
 
 <html>
 <head>
+<link rel="stylesheet" href="{{url_for('static', filename="bootstrap.css")}}">
+<!-- <link rel="stylesheet/less" href="/path/to/bootstrap.less"> -->
 
-<script src="{{url_for('static', filename='jquery-1.7.2.min.js')}}" type="text/javascript"></script>
-<script type="text/javascript">
-    $('#clickme').click(function() {
-      $('#book').animate({
-        opacity: 0.25,
-        left: '+=50',
-      }, 5000, function() {
-        // Animation complete.
-      });
-    });
-</script>
+<style>
+.square{
+  width:40%;
+}
+</style>
+
+<!-- <script src="{{url_for('static', filename='jquery-1.7.2.min.js')}}" type="text/javascript"></script> -->
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="/path/to/less.js"></script>
 
 </head>
     <body>
@@ -34,20 +34,48 @@
             {% endfor %}
         </div>
         
-        
-
-        <div style="float:left; width:50%" id="Completed_list">
-
-            <h2>Complete</h2>
-            <ol>
-            {% for task in tasks if task.done == True %}
-                <li>{{task.title}} {{task.completed_at}}</li>
-            {% endfor %}
-            </ol>
+        <div style = "width:10%">
+            <button id="left">&laquo;</button>
         </div>
+        
+        <div class= "square" id="Completed_list">
+            <div class="clickme">
+                <h2>Complete</h2>
+                <ol>
+                {% for task in tasks if task.done == True %}
+                    <li>{{task.title}} {{task.completed_at}}</li>
+                {% endfor %}
+                </ol>
+            </div>
+        </div>
+
         <div style="float:left; width:100%">
             <h3>Add a new <a href="/add"> task</a></h3>
         </div>
+        <a href="#">Click to hide me too</a>
+
+        <button id="left">&laquo;</button> <button id="right">&raquo;</button>
+
+
+<script>
+    $("#right").click(function(){
+    $(".square").animate({"left": "+=50px"}, "slow");
+    });
+
+    $("#left").click(function(){
+    $(".square").animate({"left": "-=50px"}, "slow");
+    });
+    
+    $('#clickme').click(function() {
+      $('#book').animate({
+        opacity: 0.25,
+        left: '+=50',
+      }, 5000, function() 
+      });
+    });
+
+    </script>
+
     </body>
 
 </html>
