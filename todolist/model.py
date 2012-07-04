@@ -12,13 +12,20 @@ def add(item):
 def save_all():
     db.session.commit()
 
+# class User(db.Model):
+#     id = db.Column(db.Integer, primary_key = True)
+#     name = db.Column(db.String, default='',nullable=False)
+
+
 class Task(db.Model):
     id = db.Column(db.Integer, primary_key = True)
+    # user_id = db.Model.ForeignKey(User)
     title = db.Column(db.String(64), nullable = False)
     notes = db.Column(db.Text, default = '', nullable = False)
     done = db.Column(db.Boolean, default=False, nullable = False) 
     created_at = db.Column(db.DateTime, nullable = False) 
     completed_at = db.Column(db.DateTime, default=None, nullable = True) 
+    priority = db.Column(db.Integer, default=1, nullable = False)
 
     def __init__(self, title, notes=''):
         self.title = title

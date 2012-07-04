@@ -6,7 +6,7 @@
             {% for task in tasks if task.done == False %}
             <div style="float:left; width:80%">
                 <ul>
-                    <li style="line-height:4px;">{{task.id}}{{task.title}} <span style="font-size:50%">{{task.notes}}</span></li>
+                    <li style="line-height:4px;"><a href="{{url_for('view', task_id=task.id)}}">{{task.id}} {{task.title}}</a></li>
                 </ul>
             </div>
             <div style="float:left; width:10%;margin-top:3px">
