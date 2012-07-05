@@ -1,11 +1,11 @@
 <html>
     <body>
-        <h1>YOUR TASK</h1>
         <div>
-            <form action="/add" method="POST">
-            Task title: <input type="text" name="title"><br/>
-            More notes: <input type="longtext" name="notes"><br />
-            <input type="submit">
+            <form action="{{url_for("save_task")}}" method="POST">
+            <input type="text" name="title" placeholder="Task title" ></br>
+            <textarea name="notes" class="notes" placeholder="Notes"></textarea> </br>
+            <input type="submit" value="add a new task">
+            
             </form>
         </div>
     </body>
