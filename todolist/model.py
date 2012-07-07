@@ -25,7 +25,8 @@ class Task(db.Model):
     done = db.Column(db.Boolean, default=False, nullable = False) 
     created_at = db.Column(db.DateTime, nullable = False) 
     completed_at = db.Column(db.DateTime, default=None, nullable = True) 
-    # priority = db.Column(db.Integer, default=1, nullable = False)
+    priority = db.Column(db.Integer, default=1, nullable = False)
+    hide = db.Column(db.Boolean, default=False, nullable = False)
 
     def __init__(self, title, notes=''):
         self.title = title

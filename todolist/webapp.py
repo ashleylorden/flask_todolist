@@ -7,15 +7,30 @@ app = Flask(__name__)
 @app.route("/", methods=["GET"])
 def home():
     return_str = ""
-    tasks = Task.query.all()
+    all_tasks = Task.query.all()
+    tasks = []
+    for task in all_tasks:
+    	if task.hide == False:
+   			tasks.append(task)
     return render_template("list_tasks.html", tasks=tasks)
 
-# @app.route("/", methods=["POST"])
-# def complete(self,num):
-# 	t = m.Task.query.get(num)
-# 	t.complete()
-# 	m.save_all()
-# 	return redirect("/")
+@app.route("/", methods=["POST"])
+def complete_tasks():
+	ids = request.form.getlist("select")
+	for id in ids:
+		t = m.Task.query.get(id)
+		t.complete()
+	m.save_all()
+	return redirect(url_for("home"))
+
+@app.route("/", methods=["POST"])
+def delete_tasks():
+	ids = request.form.getlist("select")
+	for id in ids:
+		t = m.Task.query.get(id)
+		t.hide = True
+	m.save_all()
+	return redirect(url_for("home"))
 
 @app.route("/add", methods=["GET"])
 def make_task():
@@ -49,6 +64,12 @@ def complete_task(task_id):
 	m.save_all()
 	return redirect(url_for("home"))	
 
+@app.route("/task/delete/<task_id>", methods=["POST"])
+def delete_task(task_id):
+	t = m.Task.query.get(task_id)
+	t.hide = True
+	m.save_all()
+	return redirect(url_for("home"))	
 
 if __name__ == '__main__':
     app.run(debug=True)

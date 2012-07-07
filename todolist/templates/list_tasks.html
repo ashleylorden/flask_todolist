@@ -2,9 +2,14 @@
 
 <html>
 <head>
-<link rel="stylesheet" href="{{url_for('static', filename="bootstrap.css")}}">
-<!-- <link rel="stylesheet/less" href="/path/to/bootstrap.less"> -->
-
+    <link rel="stylesheet" href="{{url_for('static', filename="bootstrap.css")}}">
+    <!-- <link rel="stylesheet/less" href="/path/to/bootstrap.less"> -->
+<script type="text/javascript">
+function copyText()
+{
+document.getElementById("field2").value=document.getElementById("field1").value;
+}
+</script>
 <style>
 .square{
   width:40%;
@@ -20,18 +25,24 @@
         <h1>TASK LIST</h1>
         <div style="float:left; width:50%">
             <h2>Incomplete</h2>
+            
+                <!--how do we -->
+            <div>
+                <form action="" method="POST"> 
+                    <input type="submit" name="Complete" value="complete" onclick='{{url_for("complete_tasks")}}' >
+                    <input type="submit" name="Delete" value="delete" onclick='{{url_for("delete_tasks")}}' >
+            </div>
             {% for task in tasks if task.done == False %}
             <div style="float:left; width:80%">
                 <ul>
-                    <li style="line-height:4px;"><a href="{{url_for('view', task_id=task.id)}}">{{task.id}} {{task.title}}</a></li>
+                    <li style="line-height:4px; list-style-type:none"><a href="{{url_for('view', task_id=task.id)}}">{{task.title}}</a></li>
                 </ul>
             </div>
             <div style="float:left; width:10%;margin-top:3px">
-                <form action="/list_tasks.html" method="POST">
-                    <input type="submit" value="&#10003;" >
-                </form>            
+                    <input type="checkbox" name="select" value={{task.id}} >           
             </div>
             {% endfor %}
+                </form>
         </div>
         
         <div style = "width:10%">
